@@ -5,6 +5,8 @@ const hourHand = document.querySelector(".hour-arrow");
 const secondDigital = document.querySelector(".second-digital");
 const minsDigital = document.querySelector(".min-digital");
 const hourDigital = document.querySelector(".hour-digital");
+const date = document.querySelector(".date-digital");
+const button_day_night = document.querySelector(".button-switcher");
 
 function setDate() {
   const now = new Date();
@@ -23,8 +25,6 @@ function setDate() {
   const hourDegrees = (hour / 12) * 360 + (mins / 60) * 30 + 90;
   hourHand.style.transform = ` translate(-113%, -366%) rotate(${hourDegrees}deg)`;
   hourDigital.innerHTML = hour < 10 ? `0${hour}` : hour;
-
-  const date = document.querySelector(".date-digital");
 
   const formatDate = (date) => {
     const months = [
@@ -117,3 +117,13 @@ function setDate() {
 setInterval(setDate, 1000);
 
 setDate();
+
+button_day_night.addEventListener("change", (event) => {
+  if (event.target.checked) {
+    document.querySelector(".clock").style.backgroundColor = "#63cdff";
+    document.querySelector(".second-arrow").style.backgroundColor = "#63cdff";
+  } else {
+    document.querySelector(".clock").style.backgroundColor = "antiquewhite";
+    document.querySelector(".second-arrow").style.backgroundColor = "rosybrown";
+  }
+});
