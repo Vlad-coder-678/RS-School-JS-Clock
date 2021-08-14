@@ -1,16 +1,18 @@
 :root {
-  --color-main: linear-gradient(0deg, #333, #000);
-  --color-second: #63cdff;
+  --color-day-bg: linear-gradient(0deg, #dbc0b9, #fdf6e6);
+  --color-day-clockface: #fdf6e6;
+  --color-day-arrow-text: #a07f88;
+  --color-night-bg: linear-gradient(0deg, #333, #000);
+  --color-night-clockface: linear-gradient(0deg, #333, #000);
+  --color-night-arrow-text: #63cdff;
 }
 
 html {
-  background: linear-gradient(0deg, #333, #000);
   background-size: cover;
   font-family: "helvetica neue";
   text-align: center;
   font-size: 10px;
 }
-
 body {
   margin: 0;
   font-size: 2rem;
@@ -20,25 +22,47 @@ body {
   align-items: center;
   overflow-x: hidden;
 }
+.body-day {
+  transition: all 0.3s ease-in-out;
+  background: var(--color-day-bg);
+}
+.body-night {
+  transition: all 0.3s ease-in-out;
+  background: var(--color-night-bg);
+}
 
 .container {
   max-width: 1170px;
   margin: 0 auto;
 }
 
-.clock {
+/* clockface */
+div.clock {
   position: relative;
   width: 30rem;
   height: 30rem;
   border-radius: 50%;
   margin: 30px auto;
   padding: 2rem;
-  background-color: antiquewhite;
+}
+.clock-day {
+  background: var(--color-day-clockface);
   box-shadow: 0 0 0 4px rgba(0, 0, 0, 0.1), inset 0 0 0 3px #efefef,
     inset 0 0 10px black, 0 0 10px rgba(0, 0, 0, 0.2),
     0 0 0 20px rgba(255, 255, 255, 1), 3px 0 0 20px rgba(255, 255, 255, 0.6),
     10px 10px 30px 10px rgba(0, 0, 0, 1);
+  transition: all 0.3s ease-in-out;
 }
+.clock-night {
+  background: var(--color-night-clockface);
+  box-shadow: 0 0 0 4px rgba(0, 0, 0, 0.1), inset 0 0 0 3px #333,
+    inset 0 0 10px black, 0 0 10px rgba(0, 0, 0, 0.2),
+    0 0 0 20px rgba(0, 0, 0, 1), 3px 0 0 20px rgba(0, 0, 0, 0.6),
+    10px 10px 30px 10px rgba(0, 0, 0, 1);
+  transition: all 0.3s ease-in-out;
+}
+
+/* clock-arrows */
 
 .clock-arrows {
   position: absolute;
@@ -67,20 +91,24 @@ body {
 
 .second-arrow {
   position: relative;
-  background: rosybrown;
+  background: var(--color-day-arrow-text);
+  transition: all 0.3s ease-in-out;
 }
 
-.second-arrow::after {
-  content: "";
+.center-arrow {
   position: absolute;
-  right: -9px;
-  top: -6px;
+  top: 44%;
+  left: 44%;
   width: 18px;
   height: 18px;
-  background: rosybrown;
+  transform: translate(-50%, -50%);
   border-radius: 50%;
   overflow: hidden;
+  background: var(--color-day-arrow-text);
+  transition: all 0.3s ease-in-out;
 }
+
+/* для прицеливания =) */
 
 .target {
   position: absolute;
@@ -108,13 +136,16 @@ body {
   background-color: #000;
 }
 
+/* цифры на табло */
+
 .clock-numbers {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  color: #000;
+  color: var(--color-day-arrow-text);
+  transition: all 0.3s ease-in-out;
 }
 
 div[class^="number"] {
@@ -203,12 +234,15 @@ div[class*="--12"] span {
   transform: translateY(5px) rotate(-360deg);
 }
 
+/* цифровой формат времени и даты */
+
 .clockDigital {
   position: relative;
   bottom: 10px;
   left: 50%;
   transform: translateX(-50%);
-  color: rgba(255, 255, 255, 1);
+  color: var(--color-day-arrow-text);
+  transition: all 0.3s ease-in-out;
 }
 
 .clockDigital-face {
@@ -227,6 +261,8 @@ div[class*="--12"] span {
   font-size: 3rem;
 }
 
+/* кнопка день-ночь */
+
 .wrapper-button {
   position: fixed;
   top: 40px;
@@ -234,14 +270,24 @@ div[class*="--12"] span {
   width: 100px;
   height: 100px;
 }
+
 .button-switcher {
   position: relative;
   width: 120px;
   height: 40px;
   -webkit-appearance: none;
-  background: linear-gradient(0deg, #333, #000);
   outline: none;
   border-radius: 20px;
+  transition: all 0.3s ease-in-out;
+}
+.button-switcher-day {
+  background: var(--color-day-bg);
+  box-shadow: 0 0 0 4px #dbc0b9, 0 0 0 5px #dbc0b9,
+    inset 0 0 10px rgba(255, 255, 255, 1), 0 5px 20px rgba(255, 255, 255, 0.5),
+    inset 0 0 15px rgba(255, 255, 255, 0.2);
+}
+.button-switcher-night {
+  background: var(--color-night-bg);
   box-shadow: 0 0 0 4px #353535, 0 0 0 5px #3e3e3e,
     inset 0 0 10px rgba(0, 0, 0, 1), 0 5px 20px rgba(0, 0, 0, 0.5),
     inset 0 0 15px rgba(0, 0, 0, 0.2);
@@ -260,9 +306,9 @@ div[class*="--12"] span {
   top: 0;
   width: 80px;
   height: 40px;
-  background: linear-gradient(0deg, #000, #6b6b6b);
+  background: linear-gradient(0deg, #000, #a07f88);
   border-radius: 20px;
-  box-shadow: 0 0 0 1px #232323;
+  box-shadow: 0 0 0 1px #777;
   transform: scale(0.98, 0.96);
   transition: all 0.5s ease;
 }
@@ -279,7 +325,7 @@ div[class*="--12"] span {
   left: 65px;
   width: 4px;
   height: 4px;
-  background: linear-gradient(0deg, #6b6b6b, #000);
+  background: var(--color-day-bg);
   border-radius: 50%;
   transition: all 0.5s ease;
 }

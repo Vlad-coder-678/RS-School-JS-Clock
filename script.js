@@ -120,10 +120,64 @@ setDate();
 
 button_day_night.addEventListener("change", (event) => {
   if (event.target.checked) {
-    document.querySelector(".clock").style.backgroundColor = "#63cdff";
-    document.querySelector(".second-arrow").style.backgroundColor = "#63cdff";
+    if (document.querySelector("body").classList.contains("body-day")) {
+      document.querySelector("body").classList.remove("body-day");
+    }
+    document.querySelector("body").classList.add("body-night");
+    if (
+      document
+        .getElementsByClassName("clock")[0]
+        .classList.contains("clock-day")
+    ) {
+      document.getElementsByClassName("clock")[0].classList.remove("clock-day");
+    }
+    document.getElementsByClassName("clock")[0].classList.add("clock-night");
+    if (
+      document
+        .getElementsByClassName("button-switcher")[0]
+        .classList.contains("button-switcher-day")
+    ) {
+      document
+        .getElementsByClassName("button-switcher")[0]
+        .classList.remove("button-switcher-day");
+    }
+    document
+      .getElementsByClassName("button-switcher")[0]
+      .classList.add("button-switcher-night");
+    document.querySelector(".second-arrow").style.background = "#63cdff";
+    document.querySelector(".center-arrow").style.background = "#63cdff";
+    document.querySelector(".clock-numbers").style.color = "#63cdff";
+    document.querySelector(".clockDigital").style.color = "#63cdff";
   } else {
-    document.querySelector(".clock").style.backgroundColor = "antiquewhite";
-    document.querySelector(".second-arrow").style.backgroundColor = "rosybrown";
+    if (document.querySelector("body").classList.contains("body-night")) {
+      document.querySelector("body").classList.remove("body-night");
+    }
+    document.querySelector("body").classList.add("body-day");
+    if (
+      document
+        .getElementsByClassName("clock")[0]
+        .classList.contains("clock-night")
+    ) {
+      document
+        .getElementsByClassName("clock")[0]
+        .classList.remove("clock-night");
+    }
+    document.getElementsByClassName("clock")[0].classList.add("clock-day");
+    if (
+      document
+        .getElementsByClassName("button-switcher")[0]
+        .classList.contains("button-switcher-night")
+    ) {
+      document
+        .getElementsByClassName("button-switcher")[0]
+        .classList.remove("button-switcher-night");
+    }
+    document
+      .getElementsByClassName("button-switcher")[0]
+      .classList.add("button-switcher-day");
+    document.querySelector(".second-arrow").style.background = "#a07f88";
+    document.querySelector(".center-arrow").style.background = "#a07f88";
+    document.querySelector(".clock-numbers").style.color = "#a07f88";
+    document.querySelector(".clockDigital").style.color = "#a07f88";
   }
 });
